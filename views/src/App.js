@@ -1,11 +1,28 @@
 
-
-function App() {
+import { createBrowserRouter, NavLink } from "react-router-dom";
+import ShortUrl from "./ShortUrl";
+export function App() {
   return (
     <div>
 
+      <div>
+      <input></input>
+      
+     <button>Shorten url</button>
+      </div>
     </div>
   );
 }
 
-export default App;
+export const router = createBrowserRouter([
+  {
+    path:'/',
+    element:<App/>
+  },
+  {
+    path:('/generate-short-url' || '/update-short-url'),
+    element:<ShortUrl/>
+  },
+
+
+])
