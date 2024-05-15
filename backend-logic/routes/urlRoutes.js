@@ -7,7 +7,7 @@ router.post('/generate-short-url', generateShortUrl);
 
 router.get('/:idOfTheShortUrl', redirectToLongUrl);
 
-router.post('/updateShortUrl', updateShortUrl)
+router.post('/update-short-url', updateShortUrl)
 
 
 module.exports = router;
