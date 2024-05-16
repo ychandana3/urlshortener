@@ -1,8 +1,12 @@
+import { NavLink } from "react-router-dom";
+
 const ShortUrl = () => {
     return(
         <div>
             <p>ShortUrl: </p>
-            <button>Generate Again</button>
+            <NavLink to = '/update-short-url'>
+                <button>Generate Again</button>
+            </NavLink>
         </div>
     )
 }

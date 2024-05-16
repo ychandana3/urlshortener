@@ -20,9 +20,12 @@ export const router = createBrowserRouter([
     element:<App/>
   },
   {
-    path:('/generate-short-url' || '/update-short-url'),
+    path:'/generate-short-url',
     element:<ShortUrl/>
   },
-
+  {
+    path:'/update-short-url',
+    element:<ShortUrl/>
+  },
 
 ])
