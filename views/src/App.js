@@ -2,25 +2,7 @@
 import { createBrowserRouter, NavLink } from "react-router-dom";
 import ShortUrl from "./ShortUrl";
 import styled from 'styled-components';
-
-const AppContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  
-  height: 100vh;
-  background-color: #f0f0f0;
-`;
-
-const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #fff;
-  padding: 2rem;
-  border-radius: 8px;
-  height: 300px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-`;
+import MainContainer,{StyledContainer} from "./Styled-components/Containers";
 
 const StyledInput = styled.input`
   padding: 0.5rem;
@@ -47,12 +29,12 @@ const StyledButton = styled.button`
 
 export function App() {
   return (
-    <AppContainer>
-      <FormContainer>
+    <MainContainer>
+      <StyledContainer>
         <StyledInput placeholder="Enter URL" />
         <StyledButton>Shorten URL</StyledButton>
-      </FormContainer>
-    </AppContainer>
+      </StyledContainer>
+    </MainContainer>
   );
 }
 
