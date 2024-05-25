@@ -1,13 +1,15 @@
 import { createBrowserRouter, NavLink } from "react-router-dom";
-import { useState } from "react";
-import ShortUrl from "./ShortUrl";
+import { useContext, useState, lazy, Suspense } from "react";
 import styled from "styled-components";
 import MainContainer, { StyledContainer } from "./Styled-components/Containers";
 import DefaultButton from "./Styled-components/Buttons";
 import StyledInput from "./Styled-components/Input";
+import { AppContext } from "./AppProvider";
 
+const ShortUrl = lazy(() => import("./ShortUrl"));
 export function App() {
   const [inputValue, setInputValue] = useState("");
+  const context = useContext(AppContext);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -29,7 +31,8 @@ export function App() {
       }
 
       const responseData = await response.json();
-      console.log("Response:", responseData);
+      //To set shortUrl of context
+      context.setShortUrl(responseData.data.shortLink);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -53,7 +56,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/generate-short-url",
-    element: <ShortUrl />,
+    element: (
+      <Suspense>
+        <ShortUrl />
+      </Suspense>
+    ),
   },
   {
     path: "/update-short-url",
