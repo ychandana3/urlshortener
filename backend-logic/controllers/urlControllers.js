@@ -6,22 +6,17 @@ const generateShortUrl = async (req, res) => {
   try {
     const { urlFromClient } = req.body;
 
-    const isUrlAlreadyExists = await Url.findOne({ fullUrl: urlFromClient });
-
-    if (isUrlAlreadyExists) {
-      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-        success: false,
-        message: "short url of this website has already been generated",
-      });
-    }
-
-    const generateShortUrl = await Url.create({ fullUrl: urlFromClient });
+    const urlPairIfExists = await Url.findOne({ fullUrl: urlFromClient });
+    let urlMapping;
+    if (urlPairIfExists) {
+      urlMapping = urlPairIfExists;
+    } else urlMapping = await Url.create({ fullUrl: urlFromClient });
 
     res.status(StatusCodes.CREATED).json({
       success: true,
       message: `short url of the link '${urlFromClient}' has been generated successfully`,
       data: {
-        shortLink: `${req.protocol}://${req.headers.host}/${generateShortUrl.shortIdOfTheFullUrl}`,
+        shortLink: `${req.protocol}://${req.headers.host}/${urlMapping.shortIdOfTheFullUrl}`,
       },
     });
   } catch (error) {
